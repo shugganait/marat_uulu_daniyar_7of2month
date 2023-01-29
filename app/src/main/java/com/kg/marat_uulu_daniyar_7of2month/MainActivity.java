@@ -3,24 +3,34 @@ package com.kg.marat_uulu_daniyar_7of2month;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.net.ipsec.ike.exceptions.IkeNetworkLostException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
+
+    private Button btnSecondActivity;
     private TextView textView;
     private Integer first, second, result;
     private Boolean isOperationClicked;
     private String chosenOperation;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnSecondActivity = findViewById(R.id.btn_to_second_activity);
         textView = findViewById(R.id.text_view);
+        findViewById(R.id.btn_to_second_activity).setOnClickListener(view -> {
+            Intent secondActivity = new Intent(MainActivity.this, SecondActivity.class);
+            secondActivity.putExtra("result", textView.getText().toString());
+            startActivity(secondActivity);
+        });
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -62,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 second = 0;
                 break;
         }
+        btnSecondActivity.setVisibility(View.GONE);
         isOperationClicked = false;
     }
 
@@ -72,18 +83,22 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_plus:
                 first = Integer.valueOf(textView.getText().toString());
                 chosenOperation = "+";
+                btnSecondActivity.setVisibility(View.GONE);
                 break;
             case R.id.btn_minus:
                 first = Integer.valueOf(textView.getText().toString());
                 chosenOperation = "-";
+                btnSecondActivity.setVisibility(View.GONE);
                 break;
             case R.id.btn_multiplication:
                 first = Integer.valueOf(textView.getText().toString());
                 chosenOperation = "*";
+                btnSecondActivity.setVisibility(View.GONE);
                 break;
             case R.id.btn_division:
                 first = Integer.valueOf(textView.getText().toString());
                 chosenOperation = "/";
+                btnSecondActivity.setVisibility(View.GONE);
                 break;
             case R.id.btn_equal:
                 second = Integer.valueOf(textView.getText().toString());
@@ -91,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(result.toString());
                 first = 0;
                 second = 0;
+                btnSecondActivity.setVisibility(View.VISIBLE);
                 break;
         }
         isOperationClicked = true;
