@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">marat_uulu_daniyar_7of2month</string>
+    <string name="app_name">Калкулятор</string>
     <string name="clear">AC</string>
     <string name="plus_minus">+/-</string>
     <string name="percent">%</string>
